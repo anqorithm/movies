@@ -7,6 +7,7 @@ import (
 
 func main() {
 	helpers.LoadEnv()
-	db.Connect()
+	dbConnection := db.Connect()
+	db.FlushAndMigrate(dbConnection, false)
 	select {}
 }
