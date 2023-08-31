@@ -7,7 +7,7 @@ type Movie struct {
 	BelongsToCollection string              `json:"belongs_to_collection"`
 	Budget              int                 `json:"budget"`
 	Homepage            string              `json:"homepage"`
-	ImdbID              string              `gorm:"unique" json:"imdb_id"`
+	ImdbID              string              `json:"imdb_id"`
 	OriginalLanguage    string              `json:"original_language"`
 	OriginalTitle       string              `json:"original_title"`
 	Overview            string              `json:"overview"`
