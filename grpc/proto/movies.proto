@@ -1,0 +1,61 @@
+syntax = "proto3";
+
+option go_package = "github.com/qahta0/movies/grpc/proto";
+
+package proto;
+
+service MoviesService {
+    rpc GetLatestMovies (LatestMoviesRequest) returns (LatestMoviesResponse);
+}
+
+message LatestMoviesRequest  {
+
+}
+
+message LatestMoviesResponse {
+    repeated Movie movies = 1;
+}
+
+message Movie {
+    int32 id = 1;
+    bool adult = 2;
+    string backdrop_path = 3;
+    string belongs_to_collection = 4;
+    int32 budget = 5;
+    string homepage = 6;
+    string imdb_id = 7; 
+    string original_language = 8;
+    string original_title = 9;
+    string overview = 10;
+    float popularity = 11;
+    string poster_path = 12;
+    string release_date = 13;
+    int32 revenue = 14;
+    int32 runtime = 15;
+    string status = 16;
+    string tagline = 17;
+    string title = 18;
+    bool video = 19;
+    float vote_average = 20;
+    int32 vote_count = 21;
+}
+  
+message Genre {
+    int32 id = 1;
+    string name = 2;
+}
+  
+message ProductionCompany {
+    int32 id = 1;
+    string name = 2;
+}
+  
+message ProductionCountry {
+   int32 id = 1;
+   string name = 2;
+}
+
+message SpokenLanguage {
+   int32 id = 1;
+   string name = 2;
+}

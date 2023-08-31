@@ -4,6 +4,7 @@ import (
 	"os"
 
 	"github.com/qahta0/movies/db"
+	"github.com/qahta0/movies/grpc/server"
 	"github.com/qahta0/movies/helpers"
 	"github.com/qahta0/movies/integrations"
 	"github.com/robfig/cron/v3"
@@ -17,5 +18,6 @@ func main() {
 	c := cron.New(cron.WithSeconds())
 	c.AddFunc("@every 3s", func() { integrations.FetchAndStoreLatestMovie(dbConnection, accessTokenAuth) })
 	c.Start()
+	server.StartGRPCServer(dbConnection)
 	select {}
 }
