@@ -6,6 +6,7 @@ import (
 	"github.com/qahta0/movies/db"
 	"github.com/qahta0/movies/helpers"
 	"github.com/qahta0/movies/integrations"
+	"github.com/robfig/cron/v3"
 )
 
 func main() {
@@ -13,10 +14,8 @@ func main() {
 	dbConnection := db.Connect()
 	db.FlushAndMigrate(dbConnection, false)
 	accessTokenAuth := os.Getenv("ACCESS_TOKEN_AUTH")
-	latestMovie, err := integrations.FetchLatestMovie(accessTokenAuth)
-	if err != nil {
-		return
-	}
-	integrations.StoreLatestMovie(dbConnection, latestMovie)
+	c := cron.New(cron.WithSeconds())
+	c.AddFunc("@every 3s", func() { integrations.FetchAndStoreLatestMovie(dbConnection, accessTokenAuth) })
+	c.Start()
 	select {}
 }
