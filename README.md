@@ -67,4 +67,11 @@ $ docker-compose up
 ## What After?
 
 1. You need to login into pgadmin and then create a server and this server must match the postgres container name, because the name of the container is in fact the host :)
-2. ... will see what else
+2. ... will see what 
+
+## Resources that can help you to understand how gRPC works
+
+I find these resources are good to understand how gRPC works in general :D
+
+1. https://grpc.io/docs/what-is-grpc/introduction/
+2. https://www.youtube.com/watch?v=XRXTsQwyZSU
