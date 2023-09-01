@@ -23,6 +23,7 @@ const _ = grpc.SupportPackageIsVersion7
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type MoviesServiceClient interface {
 	GetLatestMovies(ctx context.Context, in *LatestMoviesRequest, opts ...grpc.CallOption) (*LatestMoviesResponse, error)
+	SearchMovies(ctx context.Context, in *SearchMoviesRequest, opts ...grpc.CallOption) (*SearchMoviesResponse, error)
 }
 
 type moviesServiceClient struct {
@@ -42,11 +43,21 @@ func (c *moviesServiceClient) GetLatestMovies(ctx context.Context, in *LatestMov
 	return out, nil
 }
 
+func (c *moviesServiceClient) SearchMovies(ctx context.Context, in *SearchMoviesRequest, opts ...grpc.CallOption) (*SearchMoviesResponse, error) {
+	out := new(SearchMoviesResponse)
+	err := c.cc.Invoke(ctx, "/proto.MoviesService/SearchMovies", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // MoviesServiceServer is the server API for MoviesService service.
 // All implementations must embed UnimplementedMoviesServiceServer
 // for forward compatibility
 type MoviesServiceServer interface {
 	GetLatestMovies(context.Context, *LatestMoviesRequest) (*LatestMoviesResponse, error)
+	SearchMovies(context.Context, *SearchMoviesRequest) (*SearchMoviesResponse, error)
 	mustEmbedUnimplementedMoviesServiceServer()
 }
 
@@ -56,6 +67,9 @@ type UnimplementedMoviesServiceServer struct {
 
 func (UnimplementedMoviesServiceServer) GetLatestMovies(context.Context, *LatestMoviesRequest) (*LatestMoviesResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetLatestMovies not implemented")
+}
+func (UnimplementedMoviesServiceServer) SearchMovies(context.Context, *SearchMoviesRequest) (*SearchMoviesResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method SearchMovies not implemented")
 }
 func (UnimplementedMoviesServiceServer) mustEmbedUnimplementedMoviesServiceServer() {}
 
@@ -88,6 +102,24 @@ func _MoviesService_GetLatestMovies_Handler(srv interface{}, ctx context.Context
 	return interceptor(ctx, in, info, handler)
 }
 
+func _MoviesService_SearchMovies_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SearchMoviesRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(MoviesServiceServer).SearchMovies(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/proto.MoviesService/SearchMovies",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(MoviesServiceServer).SearchMovies(ctx, req.(*SearchMoviesRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // MoviesService_ServiceDesc is the grpc.ServiceDesc for MoviesService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -98,6 +130,10 @@ var MoviesService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetLatestMovies",
 			Handler:    _MoviesService_GetLatestMovies_Handler,
+		},
+		{
+			MethodName: "SearchMovies",
+			Handler:    _MoviesService_SearchMovies_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

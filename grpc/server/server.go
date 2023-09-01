@@ -26,6 +26,15 @@ func (s *server) GetLatestMovies(ctx context.Context, req *proto.LatestMoviesReq
 	}, nil
 }
 
+func (s *server) SearchMovies(ctx context.Context, req *proto.SearchMoviesRequest) (*proto.SearchMoviesResponse, error) {
+	var movies []*proto.Movie
+	searchQuery := "%" + req.Query + "%"
+	if err := s.DB.Where("title LIKE ? OR original_title LIKE ? OR overview LIKE ?", searchQuery, searchQuery, searchQuery).Find(&movies).Error; err != nil {
+		return nil, err
+	}
+	return &proto.SearchMoviesResponse{Movies: movies}, nil
+}
+
 func StartGRPCServer(dbConnection *gorm.DB) {
 	listener, err := net.Listen("tcp", ":50051")
 	if err != nil {

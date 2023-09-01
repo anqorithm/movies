@@ -6,13 +6,22 @@ package proto;
 
 service MoviesService {
     rpc GetLatestMovies (LatestMoviesRequest) returns (LatestMoviesResponse);
-}
+    rpc SearchMovies (SearchMoviesRequest) returns (SearchMoviesResponse);
+}   
 
 message LatestMoviesRequest  {
 
 }
 
 message LatestMoviesResponse {
+    repeated Movie movies = 1;
+}
+
+message SearchMoviesRequest {
+    string query = 1;
+}
+
+message SearchMoviesResponse {
     repeated Movie movies = 1;
 }
 
