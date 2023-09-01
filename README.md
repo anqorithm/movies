@@ -1,14 +1,14 @@
-## Movies
+# Movies
+
+## Overview
+
+This is a service for gitting the latest movies from IMDB API, feed the database with the latest movies and expose it throgh a gRPC connection. This service fetches a new movie from IMDB every 3 seconds and if the latest movie is not exists in the database it will insert it into the database. 
 
 ## Prerequisites
 
 1. Golang go1.20.7
 2. Docker
 3. Access Token Auth (You need to get a one from IMDB API)
-
-## Overview
-
-This is a service for gitting the latest movies from IMDB API, feed the database with the latest movies and expose it throgh a gRPC connection. This service fetches a new movie from IMDB every 3 seconds and if the latest movie is not exists in the database it will insert it into the database. 
 
 ## Important commands to compile the protocol buffers
 
