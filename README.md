@@ -64,6 +64,11 @@ $ sudo chmod -R 777 postgres_data
 $ docker-compose up
 ```
 
+
+## Containers Digram
+
+![Containers Digram](./assets/containersDigram.png)
+
 ## What After?
 
 1. You need to login into pgadmin and then create a server and this server must match the postgres container name, because the name of the container is in fact the host :)
@@ -78,7 +83,6 @@ $ go run grpc/client/client.go
 ```
 
 2. You can consume these gRPC API endpoints by importing the "movies/grpc/proto/movies.proto" to the postman then you can test them!
-
 ## Resources that can help you to understand how gRPC works
 
 I find these resources are good to understand how gRPC works in general :D
