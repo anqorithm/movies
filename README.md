@@ -67,7 +67,7 @@ $ docker-compose up
 
 ## Containers Digram
 
-![Containers Digram](./assets/containersDigram.png)
+![Containers Digram](./assets/containersDigram.svg)
 
 ## What After?
 
