@@ -30,3 +30,12 @@ func MovieProtoToDTO(movie *proto.Movie) *dtos.MovieDTO {
 		VoteCount:           movie.GetVoteCount(),
 	}
 }
+
+func MoveDetailsProtoToDTO(movieDetails *proto.MovieDetails) *dtos.MoveDetailsDTO {
+	return &dtos.MoveDetailsDTO{
+		ID:         movieDetails.GetId(),
+		Title:      movieDetails.GetTitle(),
+		Overview:   movieDetails.GetOverview(),
+		PosterPath: movieDetails.GetPosterPath(),
+	}
+}

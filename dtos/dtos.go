@@ -23,3 +23,10 @@ type MovieDTO struct {
 	VoteAverage         float32 `json:"vote_average"`
 	VoteCount           int32   `json:"vote_count"`
 }
+
+type MoveDetailsDTO struct {
+	ID         int32  `json:"id"`
+	Title      string `json:"name"`
+	PosterPath string `json:"poster"`
+	Overview   string `json:"description"`
+}

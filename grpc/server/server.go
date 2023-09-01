@@ -71,6 +71,35 @@ func (s *server) UpdateFavourites(ctx context.Context, req *proto.UpdateFavourit
 	}
 }
 
+func (s *server) GetMovieDetials(ctx context.Context, req *proto.MovieDetialsRequest) (*proto.MovieDetialsResponse, error) {
+	var movie models.Movie
+	res := s.DB.Preload("Genres").First(&movie, "id = ?", req.MovieId)
+	if res.Error != nil {
+		return nil, res.Error
+	}
+	movieDetails := &proto.MovieDetails{
+		Id:         int32(movie.ID),
+		Title:      movie.Title,
+		PosterPath: movie.PosterPath,
+		Overview:   movie.Overview,
+		Genres:     convertToProtoGenres(movie.Genres),
+	}
+	return &proto.MovieDetialsResponse{
+		MovieDetails: movieDetails,
+	}, nil
+}
+
+func convertToProtoGenres(genres []models.Genre) []*proto.Genre {
+	protoGenres := make([]*proto.Genre, len(genres))
+	for i, genre := range genres {
+		protoGenres[i] = &proto.Genre{
+			Id:   int32(genre.ID),
+			Name: genre.Name,
+		}
+	}
+	return protoGenres
+}
+
 func StartGRPCServer(dbConnection *gorm.DB) {
 	listener, err := net.Listen("tcp", ":50051")
 	if err != nil {

@@ -12,10 +12,12 @@ This is a service for gitting the latest movies from IMDB API, feed the database
 
 ## Important commands to compile the protocol buffers
 
+You have to compile the protocol buffers every time you change the pf :)
+
 ```sh
 
 $ export PATH="$PATH:$(go env GOPATH)/bin"
-$ protoc --go_out=. --go_opt=paths=source_relative --go-grpc_out=. --go-grpc_opt=paths=source_relative proto/movies.proto
+$ protoc --go_out=. --go_opt=paths=source_relative --go-grpc_out=. --go-grpc_opt=paths=source_relative grpc/proto/movies.proto
 
 ```
 
@@ -33,5 +35,6 @@ ACCESS_TOKEN_AUTH=
 ## How to run?
 
 ```
+$ sudo chmod -R 777 postgres_data
 $ docker-compose up
 ```

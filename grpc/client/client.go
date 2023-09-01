@@ -34,11 +34,11 @@ func getLatestMovies(client proto.MoviesServiceClient) {
 }
 
 func searchMovies(client proto.MoviesServiceClient, query string) {
-	response, err := client.SearchMovies(context.Background(), &proto.SearchMoviesRequest{Query: query})
+	res, err := client.SearchMovies(context.Background(), &proto.SearchMoviesRequest{Query: query})
 	if err != nil {
 		log.Fatalf("err: %v", err)
 	}
-	for _, movie := range response.Movies {
+	for _, movie := range res.Movies {
 		movieDTO := helpers.MovieProtoToDTO(movie)
 		movieJSON, err := json.Marshal(movieDTO)
 		if err != nil {
@@ -59,8 +59,24 @@ func updateFavourites(client proto.MoviesServiceClient, action proto.FavouriteAc
 	log.Printf("%v", res.Message)
 }
 
+func getMovieDetials(client proto.MoviesServiceClient, movie_id uint32) {
+	res, err := client.GetMovieDetials(context.Background(), &proto.MovieDetialsRequest{MovieId: movie_id})
+	if err != nil {
+		log.Fatalf("err: %v", err)
+	}
+	movieDTO := helpers.MoveDetailsProtoToDTO(res.MovieDetails)
+	movieJSON, err := json.Marshal(movieDTO)
+	if err != nil {
+		log.Fatalf("err: %v", err)
+	}
+	var out bytes.Buffer
+	json.Indent(&out, movieJSON, "", " ")
+	out.WriteTo(os.Stdout)
+	println(",")
+}
+
 func main() {
-	connection, err := grpc.Dial("localhost:50051", grpc.WithTransportCredentials(insecure.NewCredentials()))
+	connection, err := grpc.Dial("127.0.0.1:50051", grpc.WithTransportCredentials(insecure.NewCredentials()))
 	if err != nil {
 		log.Fatalf("err: %v", err)
 	}
@@ -70,7 +86,8 @@ func main() {
 	fmt.Println("1: Get latest movies")
 	fmt.Println("2: Search movies")
 	fmt.Println("3: Update Favorites")
-	fmt.Print("Enter a number (1-3): ")
+	fmt.Println("4: Get movie details")
+	fmt.Print("Enter a number (1-4): ")
 	fmt.Scanln(&choice)
 	switch strings.TrimSpace(choice) {
 	case "1":
@@ -91,6 +108,11 @@ func main() {
 		fmt.Print("Enter Action: ")
 		fmt.Scanln(&action)
 		updateFavourites(client, action, userId, movieId)
+	case "4":
+		var movieId uint32
+		fmt.Print("Enter MovieID: ")
+		fmt.Scanln(&movieId)
+		getMovieDetials(client, movieId)
 	default:
 		log.Fatalf("Invalid choice: %s", choice)
 	}

@@ -8,10 +8,19 @@ service MoviesService {
     rpc GetLatestMovies (LatestMoviesRequest) returns (LatestMoviesResponse);
     rpc SearchMovies (SearchMoviesRequest) returns (SearchMoviesResponse);
     rpc UpdateFavourites(UpdateFavouritesRequest) returns (UpdateFavouritesResponse);
+    rpc GetMovieDetials(MovieDetialsRequest) returns (MovieDetialsResponse);
 }   
 
-message LatestMoviesRequest  {
+message MovieDetialsResponse {
+    MovieDetails detials = 1;
+}
 
+message MovieDetialsRequest {
+    uint32 movie_id = 1;
+}
+
+message LatestMoviesRequest  {
+ 
 }
 
 message LatestMoviesResponse {
@@ -40,6 +49,14 @@ message UpdateFavouritesRequest {
 message UpdateFavouritesResponse {
     bool success = 1;
     string message = 2;
+}
+
+message MovieDetails {
+    int32 id = 1;
+    string title = 2;
+    string poster_path = 3;
+    string overview = 4;
+    repeated Genre genres = 5;
 }
 
 message Movie {
