@@ -73,7 +73,7 @@ $ docker-compose up
 
 1. You need to login into pgadmin and then create a server and this server must match the postgres container name, because the name of the container is in fact the host :)
 
-## Hot to consume the gRPC API endpoints?
+## How to consume the gRPC API endpoints?
 
 1. You can consume these gRPC API endpoints by the client CLI
 
