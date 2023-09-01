@@ -64,10 +64,10 @@ $ sudo chmod -R 777 postgres_data
 $ docker-compose up
 ```
 
-
 ## Containers Digram
 
-![Containers Digram](./assets/containersDigram.svg)
+[<img src="./assets/containersDigram.svg" width="800"/>](./assets/containersDigram.svg)
+
 
 ## What After?
 
