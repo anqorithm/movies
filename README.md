@@ -83,5 +83,6 @@ $ go run grpc/client/client.go
 
 I find these resources are good to understand how gRPC works in general :D
 
-1. https://grpc.io/docs/what-is-grpc/introduction/
-2. https://www.youtube.com/watch?v=XRXTsQwyZSU
+1. (An Introduction to Programming in Go) https://www.golang-book.com/books/intro 
+2. (Introduction to gRPC) https://grpc.io/docs/what-is-grpc/introduction/
+3. (gRPC Introduction) https://www.youtube.com/watch?v=XRXTsQwyZSU
