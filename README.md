@@ -63,3 +63,8 @@ $ mv .env.example .env
 $ sudo chmod -R 777 postgres_data
 $ docker-compose up
 ```
+
+## What After?
+
+1. You need to login into pgadmin and then create a server and this server must match the postgres container name, because the name of the container is in fact the host :)
+2. ... will see what else
