@@ -9,9 +9,9 @@ This is a service for gitting the latest movies from IMDB API, feed the database
 1. Golang go 1.20.7 or higher
     * https://go.dev/doc/install
 2. Protocol Buffer Compiler
-    * https://grpc.io/docs/protoc-installation/
+    * https://grpc.io/docs/protoc-installation
 3. Docker
-    * https://docs.docker.com/engine/install/
+    * https://docs.docker.com/engine/install
 4. Access Token Auth (You need to get a one from IMDB API)
 
 ## Notes
@@ -84,5 +84,5 @@ $ go run grpc/client/client.go
 I find these resources are good to understand how gRPC works in general :D
 
 1. (An Introduction to Programming in Go) https://www.golang-book.com/books/intro 
-2. (Introduction to gRPC) https://grpc.io/docs/what-is-grpc/introduction/
+2. (Introduction to gRPC) https://grpc.io/docs/what-is-grpc/introduction
 3. (gRPC Introduction) https://www.youtube.com/watch?v=XRXTsQwyZSU
