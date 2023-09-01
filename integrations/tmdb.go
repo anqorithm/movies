@@ -15,11 +15,11 @@ const (
 	latestMovieEndpoint = "latest"
 )
 
-func FetchAndStoreLatestMovie(dbConnection *gorm.DB, accessTokenAuth string) error {
+func FetchAndStoreLatestMovie(dbConnection *gorm.DB, accessTokenAuth *string) error {
 	url := fmt.Sprintf("https://%s/%s", baseMovieEndpoint, latestMovieEndpoint)
 	req, _ := http.NewRequest("GET", url, nil)
 	req.Header.Add("accept", "application/json")
-	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", accessTokenAuth))
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", *accessTokenAuth))
 	res, err := http.DefaultClient.Do(req)
 	if err != nil {
 		return nil

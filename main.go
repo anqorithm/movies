@@ -16,7 +16,7 @@ func main() {
 	db.FlushAndMigrate(dbConnection, false)
 	accessTokenAuth := os.Getenv("ACCESS_TOKEN_AUTH")
 	c := cron.New(cron.WithSeconds())
-	c.AddFunc("@every 3s", func() { integrations.FetchAndStoreLatestMovie(dbConnection, accessTokenAuth) })
+	c.AddFunc("@every 3s", func() { integrations.FetchAndStoreLatestMovie(dbConnection, &accessTokenAuth) })
 	c.Start()
 	server.StartGRPCServer(dbConnection)
 	select {}

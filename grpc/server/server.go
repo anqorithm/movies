@@ -38,7 +38,7 @@ func (s *server) SearchMovies(ctx context.Context, req *proto.SearchMoviesReques
 }
 
 func (s *server) UpdateFavourites(ctx context.Context, req *proto.UpdateFavouritesRequest) (*proto.UpdateFavouritesResponse, error) {
-	var favourite models.UserMovieFavourites
+	var favourite *models.UserMovieFavourites
 	var user models.User
 	var movie models.Movie
 	fmt.Println(req.UserId, req.MovieId)
@@ -53,7 +53,7 @@ func (s *server) UpdateFavourites(ctx context.Context, req *proto.UpdateFavourit
 		if err := s.DB.First(&favourite, "user_id = ? AND movie_id = ?", req.UserId, req.MovieId).Error; err == nil {
 			return &proto.UpdateFavouritesResponse{Message: "Movie is already in favourites!"}, nil
 		}
-		favourite = models.UserMovieFavourites{
+		favourite = &models.UserMovieFavourites{
 			UserID:  int32(req.UserId),
 			MovieID: int32(req.MovieId),
 		}
@@ -72,7 +72,7 @@ func (s *server) UpdateFavourites(ctx context.Context, req *proto.UpdateFavourit
 }
 
 func (s *server) GetMovieDetials(ctx context.Context, req *proto.MovieDetialsRequest) (*proto.MovieDetialsResponse, error) {
-	var movie models.Movie
+	var movie *models.Movie
 	res := s.DB.Preload("Genres").First(&movie, "id = ?", req.MovieId)
 	if res.Error != nil {
 		return nil, res.Error
@@ -82,16 +82,16 @@ func (s *server) GetMovieDetials(ctx context.Context, req *proto.MovieDetialsReq
 		Title:      movie.Title,
 		PosterPath: movie.PosterPath,
 		Overview:   movie.Overview,
-		Genres:     convertToProtoGenres(movie.Genres),
+		Genres:     convertToProtoGenres(&movie.Genres),
 	}
 	return &proto.MovieDetialsResponse{
 		Detials: movieDetails,
 	}, nil
 }
 
-func convertToProtoGenres(genres []models.Genre) []*proto.Genre {
-	protoGenres := make([]*proto.Genre, len(genres))
-	for i, genre := range genres {
+func convertToProtoGenres(genres *[]models.Genre) []*proto.Genre {
+	protoGenres := make([]*proto.Genre, len(*genres))
+	for i, genre := range *genres {
 		protoGenres[i] = &proto.Genre{
 			Id:   int32(genre.ID),
 			Name: genre.Name,

@@ -51,16 +51,16 @@ func searchMovies(client proto.MoviesServiceClient, query string) {
 	}
 }
 
-func updateFavourites(client proto.MoviesServiceClient, action proto.FavouriteAction, user_id uint32, movie_id uint32) {
-	res, err := client.UpdateFavourites(context.Background(), &proto.UpdateFavouritesRequest{Action: action, UserId: user_id, MovieId: movie_id})
+func updateFavourites(client proto.MoviesServiceClient, action *proto.FavouriteAction, user_id *uint32, movie_id *uint32) {
+	res, err := client.UpdateFavourites(context.Background(), &proto.UpdateFavouritesRequest{Action: *action, UserId: *user_id, MovieId: *movie_id})
 	if err != nil {
 		log.Fatalf("err: %v", err)
 	}
 	log.Printf("%v", res.Message)
 }
 
-func getMovieDetials(client proto.MoviesServiceClient, movie_id uint32) {
-	res, err := client.GetMovieDetials(context.Background(), &proto.MovieDetialsRequest{MovieId: movie_id})
+func getMovieDetials(client proto.MoviesServiceClient, movie_id *uint32) {
+	res, err := client.GetMovieDetials(context.Background(), &proto.MovieDetialsRequest{MovieId: *movie_id})
 	if err != nil {
 		log.Fatalf("err: %v", err)
 	}
@@ -107,12 +107,12 @@ func main() {
 		fmt.Scanln(&movieId)
 		fmt.Print("Enter Action: ")
 		fmt.Scanln(&action)
-		updateFavourites(client, action, userId, movieId)
+		updateFavourites(client, &action, &userId, &movieId)
 	case "4":
 		var movieId uint32
 		fmt.Print("Enter MovieID: ")
 		fmt.Scanln(&movieId)
-		getMovieDetials(client, movieId)
+		getMovieDetials(client, &movieId)
 	default:
 		log.Fatalf("Invalid choice: %s", choice)
 	}
