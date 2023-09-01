@@ -66,7 +66,7 @@ $ docker-compose up
 
 ## Containers Digram
 
-[<img src="./assets/containersDigram.svg" width="800"/>](./assets/containersDigram.svg)
+[<img src="./assets/containersDigram.svg" width="850"/>](./assets/containersDigram.svg)
 
 
 ## What After?
@@ -83,6 +83,9 @@ $ go run grpc/client/client.go
 ```
 
 2. You can consume these gRPC API endpoints by importing the "movies/grpc/proto/movies.proto" to the postman then you can test them!
+
+[<img src="./assets/gRPCEndpoints.png" width="850"/>](./assets/gRPCEndpoints.png)
+
 ## Resources that can help you to understand how gRPC works
 
 I find these resources are good to understand how gRPC works in general :D
