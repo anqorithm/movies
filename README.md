@@ -7,10 +7,22 @@ This is a service for gitting the latest movies from IMDB API, feed the database
 ## Prerequisites
 
 1. Golang go1.20.7
-2. Docker
-3. Access Token Auth (You need to get a one from IMDB API)
+    * https://go.dev/doc/install
+2. Protocol Buffer Compiler
+    * https://grpc.io/docs/protoc-installation/
+3. Docker
+    * https://docs.docker.com/engine/install/
+4. Access Token Auth (You need to get a one from IMDB API)
 
-## Important commands to compile the protocol buffers
+## Notes
+
+### Using TMDB with Postam
+
+If you are used to postamn "like me :)" then you can find there api here: https://www.postman.com/devrel/workspace/tmdb-api/overview
+
+You can just simply fork it and use it directly from postman
+
+### Important commands to compile the protocol buffers
 
 You have to compile the protocol buffers every time you change the pf :)
 
