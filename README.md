@@ -21,7 +21,7 @@ $ protoc --go_out=. --go_opt=paths=source_relative --go-grpc_out=. --go-grpc_opt
 
 ```
 
-## Fill the ".env" file
+## Fill the ".env" file (if you run it locally) with your own settings
 
 ```
 DB_HOST=
@@ -32,9 +32,21 @@ DB_PORT=
 ACCESS_TOKEN_AUTH=
 ```
 
+## Use the following ".env" file (if you run it using the provided docker & docker-compose)
+
+```
+DB_HOST=postgres
+DB_USER=movies
+DB_PASSWORD=movies
+DB_NAME=movies
+DB_PORT=5432
+ACCESS_TOKEN_AUTH=
+```
+
 ## How to run?
 
 ```
+$ mv .env.example .env
 $ sudo chmod -R 777 postgres_data
 $ docker-compose up
 ```
