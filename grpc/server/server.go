@@ -2,10 +2,12 @@ package server
 
 import (
 	"context"
+	"fmt"
 	"log"
 	"net"
 
 	"github.com/qahta0/movies/grpc/proto"
+	"github.com/qahta0/movies/models"
 	"google.golang.org/grpc"
 	"gorm.io/gorm"
 )
@@ -33,6 +35,40 @@ func (s *server) SearchMovies(ctx context.Context, req *proto.SearchMoviesReques
 		return nil, err
 	}
 	return &proto.SearchMoviesResponse{Movies: movies}, nil
+}
+
+func (s *server) UpdateFavourites(ctx context.Context, req *proto.UpdateFavouritesRequest) (*proto.UpdateFavouritesResponse, error) {
+	var favourite models.UserMovieFavourites
+	var user models.User
+	var movie models.Movie
+	fmt.Println(req.UserId, req.MovieId)
+	if err := s.DB.First(&user, "id = ?", req.UserId).Error; err != nil {
+		return nil, fmt.Errorf("user with ID %d does not exist", req.UserId)
+	}
+	if err := s.DB.First(&movie, "id = ?", req.MovieId).Error; err != nil {
+		return nil, fmt.Errorf("movie with ID %v does not exist", req.MovieId)
+	}
+	switch req.Action {
+	case proto.FavouriteAction_ADD:
+		if err := s.DB.First(&favourite, "user_id = ? AND movie_id = ?", req.UserId, req.MovieId).Error; err == nil {
+			return &proto.UpdateFavouritesResponse{Message: "Movie is already in favourites!"}, nil
+		}
+		favourite = models.UserMovieFavourites{
+			UserID:  int32(req.UserId),
+			MovieID: int32(req.MovieId),
+		}
+		if err := s.DB.Create(&favourite).Error; err != nil {
+			return nil, err
+		}
+		return &proto.UpdateFavouritesResponse{Message: "Movie added to favourites successfully!"}, nil
+	case proto.FavouriteAction_REMOVE:
+		if err := s.DB.Where("user_id = ? AND movie_id = ?", req.UserId, req.MovieId).Delete(&favourite).Error; err != nil {
+			return nil, err
+		}
+		return &proto.UpdateFavouritesResponse{Message: "Movie removed from favourites successfully"}, nil
+	default:
+		return nil, fmt.Errorf("unknown action: %v", req.Action)
+	}
 }
 
 func StartGRPCServer(dbConnection *gorm.DB) {

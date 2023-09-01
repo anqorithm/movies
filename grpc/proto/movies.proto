@@ -7,6 +7,7 @@ package proto;
 service MoviesService {
     rpc GetLatestMovies (LatestMoviesRequest) returns (LatestMoviesResponse);
     rpc SearchMovies (SearchMoviesRequest) returns (SearchMoviesResponse);
+    rpc UpdateFavourites(UpdateFavouritesRequest) returns (UpdateFavouritesResponse);
 }   
 
 message LatestMoviesRequest  {
@@ -23,6 +24,22 @@ message SearchMoviesRequest {
 
 message SearchMoviesResponse {
     repeated Movie movies = 1;
+}
+
+enum FavouriteAction {
+    ADD = 0;
+    REMOVE = 1;
+}
+
+message UpdateFavouritesRequest {
+    uint32 user_id = 1;
+    uint32 movie_id = 2;
+    FavouriteAction action = 3;
+}
+
+message UpdateFavouritesResponse {
+    bool success = 1;
+    string message = 2;
 }
 
 message Movie {

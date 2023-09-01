@@ -1,5 +1,19 @@
 package models
 
+type User struct {
+	ID              uint    `gorm:"primaryKey" json:"id"`
+	Email           string  `gorm:"uniqueIndex" json:"email"`
+	Username        string  `gorm:"uniqueIndex" json:"username"`
+	Password        string  `json:"password"`
+	Name            string  `json:"name"`
+	FavouriteMovies []Movie `gorm:"many2many:user_movie_favourites;" json:"favourite_movies"`
+}
+
+type UserMovieFavourites struct {
+	UserID  int32 `gorm:"primaryKey"`
+	MovieID int32 `gorm:"primaryKey"`
+}
+
 type Movie struct {
 	ID                  uint                `gorm:"primaryKey" json:"id"`
 	Adult               bool                `json:"adult"`

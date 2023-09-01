@@ -24,6 +24,7 @@ const _ = grpc.SupportPackageIsVersion7
 type MoviesServiceClient interface {
 	GetLatestMovies(ctx context.Context, in *LatestMoviesRequest, opts ...grpc.CallOption) (*LatestMoviesResponse, error)
 	SearchMovies(ctx context.Context, in *SearchMoviesRequest, opts ...grpc.CallOption) (*SearchMoviesResponse, error)
+	UpdateFavourites(ctx context.Context, in *UpdateFavouritesRequest, opts ...grpc.CallOption) (*UpdateFavouritesResponse, error)
 }
 
 type moviesServiceClient struct {
@@ -52,12 +53,22 @@ func (c *moviesServiceClient) SearchMovies(ctx context.Context, in *SearchMovies
 	return out, nil
 }
 
+func (c *moviesServiceClient) UpdateFavourites(ctx context.Context, in *UpdateFavouritesRequest, opts ...grpc.CallOption) (*UpdateFavouritesResponse, error) {
+	out := new(UpdateFavouritesResponse)
+	err := c.cc.Invoke(ctx, "/proto.MoviesService/UpdateFavourites", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // MoviesServiceServer is the server API for MoviesService service.
 // All implementations must embed UnimplementedMoviesServiceServer
 // for forward compatibility
 type MoviesServiceServer interface {
 	GetLatestMovies(context.Context, *LatestMoviesRequest) (*LatestMoviesResponse, error)
 	SearchMovies(context.Context, *SearchMoviesRequest) (*SearchMoviesResponse, error)
+	UpdateFavourites(context.Context, *UpdateFavouritesRequest) (*UpdateFavouritesResponse, error)
 	mustEmbedUnimplementedMoviesServiceServer()
 }
 
@@ -70,6 +81,9 @@ func (UnimplementedMoviesServiceServer) GetLatestMovies(context.Context, *Latest
 }
 func (UnimplementedMoviesServiceServer) SearchMovies(context.Context, *SearchMoviesRequest) (*SearchMoviesResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method SearchMovies not implemented")
+}
+func (UnimplementedMoviesServiceServer) UpdateFavourites(context.Context, *UpdateFavouritesRequest) (*UpdateFavouritesResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateFavourites not implemented")
 }
 func (UnimplementedMoviesServiceServer) mustEmbedUnimplementedMoviesServiceServer() {}
 
@@ -120,6 +134,24 @@ func _MoviesService_SearchMovies_Handler(srv interface{}, ctx context.Context, d
 	return interceptor(ctx, in, info, handler)
 }
 
+func _MoviesService_UpdateFavourites_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateFavouritesRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(MoviesServiceServer).UpdateFavourites(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/proto.MoviesService/UpdateFavourites",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(MoviesServiceServer).UpdateFavourites(ctx, req.(*UpdateFavouritesRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // MoviesService_ServiceDesc is the grpc.ServiceDesc for MoviesService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -134,6 +166,10 @@ var MoviesService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "SearchMovies",
 			Handler:    _MoviesService_SearchMovies_Handler,
+		},
+		{
+			MethodName: "UpdateFavourites",
+			Handler:    _MoviesService_UpdateFavourites_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

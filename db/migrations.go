@@ -9,11 +9,11 @@ import (
 
 func FlushAndMigrate(db *gorm.DB, flushDatabase bool) {
 	if flushDatabase {
-		if err := db.Migrator().DropTable(&models.Movie{}, &models.Genre{}, &models.ProductionCompany{}, &models.ProductionCountry{}, &models.SpokenLanguage{}); err != nil {
+		if err := db.Migrator().DropTable(&models.Movie{}, &models.User{}, &models.UserMovieFavourites{}, &models.Genre{}, &models.ProductionCompany{}, &models.ProductionCountry{}, &models.SpokenLanguage{}); err != nil {
 			log.Fatalf("Could not drop tables: %v", err)
 		}
 	}
-	if err := db.AutoMigrate(&models.Movie{}, &models.Genre{}, &models.ProductionCompany{}, &models.ProductionCountry{}, &models.SpokenLanguage{}); err != nil {
+	if err := db.AutoMigrate(&models.Movie{}, &models.User{}, &models.UserMovieFavourites{}, &models.Genre{}, &models.ProductionCompany{}, &models.ProductionCountry{}, &models.SpokenLanguage{}); err != nil {
 		log.Fatalf("Could not migrate: %v", err)
 	}
 }
