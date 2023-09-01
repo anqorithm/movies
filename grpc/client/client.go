@@ -64,7 +64,7 @@ func getMovieDetials(client proto.MoviesServiceClient, movie_id uint32) {
 	if err != nil {
 		log.Fatalf("err: %v", err)
 	}
-	movieDTO := helpers.MoveDetailsProtoToDTO(res.MovieDetails)
+	movieDTO := helpers.MoveDetailsProtoToDTO(res.Detials)
 	movieJSON, err := json.Marshal(movieDTO)
 	if err != nil {
 		log.Fatalf("err: %v", err)

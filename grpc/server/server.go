@@ -85,7 +85,7 @@ func (s *server) GetMovieDetials(ctx context.Context, req *proto.MovieDetialsReq
 		Genres:     convertToProtoGenres(movie.Genres),
 	}
 	return &proto.MovieDetialsResponse{
-		MovieDetails: movieDetails,
+		Detials: movieDetails,
 	}, nil
 }
 
