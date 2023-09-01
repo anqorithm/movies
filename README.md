@@ -6,7 +6,7 @@ This is a service for gitting the latest movies from IMDB API, feed the database
 
 ## Prerequisites
 
-1. Golang go1.20.7
+1. Golang go 1.20.7 or higher
     * https://go.dev/doc/install
 2. Protocol Buffer Compiler
     * https://grpc.io/docs/protoc-installation/
@@ -18,9 +18,10 @@ This is a service for gitting the latest movies from IMDB API, feed the database
 
 ### Using TMDB with Postam
 
-If you are used to postamn "like me :)" then you can find there api here: https://www.postman.com/devrel/workspace/tmdb-api/overview
+If you are used to postamn "like me :)" then you can find there api here:
+* https://www.postman.com/devrel/workspace/tmdb-api/overview
 
-You can just simply fork it and use it directly from postman
+You can just simply fork it and use it directly from postman 💥
 
 ### Important commands to compile the protocol buffers
 
