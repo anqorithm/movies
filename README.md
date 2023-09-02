@@ -6,7 +6,7 @@ This is a service for gitting the latest movies from IMDB API, feed the database
 
 ## Features
 
-1. ✅ Integration with IMDB API, with fetching and feeding the database with the latest movies
+1. ✅ Integration with IMDB API, with fetching with help of a cron job that runs every 3 seconds and feeding the database with the latest movies
 2. ✅ GetLatestMovies
 3. ✅ SearchMovies
     * by title 
