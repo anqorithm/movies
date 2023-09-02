@@ -44,7 +44,7 @@ You can just simply fork it and use it directly from postman 😎
 You have to compile the protocol buffers every time you change the pf :)
 
 ```sh
-
+$ cd movies # you should be in the root directory before executing the below commands 👇
 $ export PATH="$PATH:$(go env GOPATH)/bin"
 $ protoc --go_out=. --go_opt=paths=source_relative --go-grpc_out=. --go-grpc_opt=paths=source_relative grpc/proto/movies.proto
 
