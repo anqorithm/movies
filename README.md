@@ -2,7 +2,23 @@
 
 ## Overview
 
-This is a service for gitting the latest movies from IMDB API, feed the database with the latest movies and expose it throgh a gRPC connection. This service fetches a new movie from IMDB every 3 seconds and if the latest movie is not exists in the database it will insert it into the database. 
+This is a service for gitting the latest movies from IMDB API, feed the database with the latest movies and expose it throgh a gRPC connection. This service fetches a new movie from IMDB every 3 seconds and if the latest movie is not exists in the database it will insert it into the database.
+
+## Features
+
+1. ✅ Integration with IMDB API, with fetching and feeding the database with the latest movies
+2. ✅ GetLatestMovies
+3. ✅ SearchMovies
+    * by title 
+    * by description
+    * by released_date
+4. ✅ UpdateFavourites
+    * add to favorites list
+    * remove from favorites list
+5. ✅ GetMovieDetials
+6. ⌛ Authentication
+7. ⌛ Proper Logging
+8. ⌛ Localized Error Messages
 
 ## Prerequisites
 
