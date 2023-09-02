@@ -75,7 +75,7 @@ DB_USER=movies
 DB_PASSWORD=movies
 DB_NAME=movies
 DB_PORT=5432
-ACCESS_TOKEN_AUTH=
+ACCESS_TOKEN_AUTH=fOrSEcUrItyREaSoNs
 ```
 
 ## How to run?
