@@ -75,7 +75,7 @@ $ docker-compose up
 
 ## How to consume the gRPC API endpoints?
 
-1. You can consume these gRPC API endpoints by the client CLI
+1. Method 1: You can consume these gRPC API endpoints by the client CLI
 
 ```sh
 $ cd movies
@@ -88,7 +88,7 @@ $ go run grpc/client/client.go
 $ Enter a number (1-4): 
 ```
 
-2. You can consume these gRPC API endpoints by importing the "movies/grpc/proto/movies.proto" to the postman then you can test them!
+2. Method 2: You can consume these gRPC API endpoints by importing the "movies/grpc/proto/movies.proto" to the postman then you can test them!
 
 [<img src="./assets/gRPCEndpoints.png" width="850"/>](./assets/gRPCEndpoints.png)
 
