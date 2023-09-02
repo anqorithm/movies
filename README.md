@@ -101,6 +101,7 @@ $ go run grpc/client/client.go
 2: Search movies
 3: Update Favorites
 4: Get movie details
+
 $ Enter a number (1-4): 
 ```
 
