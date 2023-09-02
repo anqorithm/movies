@@ -37,7 +37,7 @@ This is a service for gitting the latest movies from IMDB API, feed the database
 If you are used to postamn "like me :)" then you can find there api here:
 * https://www.postman.com/devrel/workspace/tmdb-api/overview
 
-You can just simply fork it and use it directly from postman 💥
+You can just simply fork it and use it directly from postman 😎
 
 ### Important commands to compile the protocol buffers
 
@@ -110,7 +110,7 @@ $ Enter a number (1-4):
 
 ## Resources that can help you to understand how gRPC works
 
-I find these resources are good to understand how gRPC works in general :D
+I find these resources are good to understand how gRPC works in general :)
 
 1. (An Introduction to Programming in Go) https://www.golang-book.com/books/intro 
 2. (Introduction to gRPC) https://grpc.io/docs/what-is-grpc/introduction
