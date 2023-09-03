@@ -91,6 +91,21 @@ $ docker-compose up
 [<img src="./assets/containersDigram.svg" width="850"/>](./assets/containersDigram.svg)
 
 
+## Scrapped Movies Into the PostgreSQL Database
+
+
+[<img src="./assets/scrappedMovies.png" width="850"/>](./assets/runningContainers.png)
+
+## Running Containers
+
+[<img src="./assets/runningContainers.png" width="850"/>](./assets/runningContainers.png)
+
+
+## Fetching and Storing Movie Logs
+
+[<img src="./assets/fetchingAndStoringMovie.png" width="850"/>](./assets/fetchingAndStoringMovie.png)
+
+
 ## What After?
 
 1. You need to login into pgadmin and then create a server and this server must match the postgres container name, because the name of the container is in fact the host :)
