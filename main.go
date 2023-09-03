@@ -14,6 +14,8 @@ func main() {
 	helpers.LoadEnv()
 	dbConnection := db.Connect()
 	db.FlushAndMigrate(dbConnection, false)
+	db.RunSeeders(dbConnection, true)
+	db.RunFactories(dbConnection, false, 10)
 	accessTokenAuth := os.Getenv("ACCESS_TOKEN_AUTH")
 	c := cron.New(cron.WithSeconds())
 	c.AddFunc("@every 3s", func() { integrations.FetchAndStoreLatestMovie(dbConnection, &accessTokenAuth) })
