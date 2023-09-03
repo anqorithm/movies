@@ -91,7 +91,7 @@ $ docker-compose up
 [<img src="./assets/containersDigram.svg" width="850"/>](./assets/containersDigram.svg)
 
 
-## Scrapped Movies Into the PostgreSQL Database
+## Fetched Movies Into the PostgreSQL Database
 
 
 [<img src="./assets/scrappedMovies.png" width="850"/>](./assets/runningContainers.png)
