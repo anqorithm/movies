@@ -14,6 +14,7 @@ func RunSeeders(db *gorm.DB, isAllowedToRunSeeders bool) {
 }
 
 func seedUsers(db *gorm.DB) {
+	var userCount uint
 	user := models.User{
 		ID:       1,
 		Email:    "abdullah.n.alqahtani@hotmail.com",
@@ -21,7 +22,12 @@ func seedUsers(db *gorm.DB) {
 		Password: "qahta0",
 		Name:     "Abdullah Alqahtani",
 	}
-	if err := db.Create(&user).Error; err != nil {
-		log.Fatalf("err: %v", err)
+	db.Model(&models.User{}).Where("email = ?", user.Email).Count(&userCount)
+	if userCount == 0 {
+		if err := db.Create(&user).Error; err != nil {
+			log.Fatalf("err: %v", err)
+		}
+	} else {
+		log.Println("User already exists, skipping seed.")
 	}
 }

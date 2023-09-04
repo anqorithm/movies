@@ -65,6 +65,8 @@ DB_PASSWORD=
 DB_NAME=
 DB_PORT=
 ACCESS_TOKEN_AUTH=
+RUN_SEEDERS=
+RUN_FACTORIES=
 ```
 
 ## Use the following ".env" file (if you run it using the provided docker & docker-compose)
@@ -76,6 +78,8 @@ DB_PASSWORD=movies
 DB_NAME=movies
 DB_PORT=5432
 ACCESS_TOKEN_AUTH=fOrSEcUrItyREaSoNs
+RUN_SEEDERS=true
+RUN_FACTORIES=false
 ```
 
 ## How to run?
