@@ -28,7 +28,7 @@ This is a service for gitting the latest movies from IMDB API, feed the database
 
 ## Prerequisites
 
-1. Golang go 1.20.7 or higher
+1. Golang go 1.26 or higher
     * https://go.dev/doc/install
 2. Protocol Buffer Compiler
     * https://grpc.io/docs/protoc-installation

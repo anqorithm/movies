@@ -14,7 +14,7 @@ func RunSeeders(db *gorm.DB, isAllowedToRunSeeders bool) {
 }
 
 func seedUsers(db *gorm.DB) {
-	var userCount uint
+	var userCount int64
 	user := models.User{
 		ID:       1,
 		Email:    "abdullah.n.alqahtani@hotmail.com",
